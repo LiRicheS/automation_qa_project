@@ -10,6 +10,7 @@ options = webdriver.ChromeOptions()
 def driver():
     options.add_argument('--window-size=1920,1080')
     options.add_argument('--incognito')
+    # options.page_load_strategy = 'eager'
     service = Service(executable_path=ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     yield driver
