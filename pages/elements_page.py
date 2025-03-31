@@ -3,6 +3,7 @@ import random
 from generator.generator import generate_data_person
 from locators.elements_page_locators import TextBoxPageLocators
 from locators.elements_page_locators import CheckboxPageLocators
+from locators.elements_page_locators import RadioButtonPageLocators
 from pages.base_page import BasePage
 
 
@@ -50,7 +51,8 @@ class CheckBoxPage(BasePage):
 
         for name, locator in self.locators.STATUS_CHECKBOXES_DICT.items():
             if name in selected_items:  # Если название чекбокса есть в выходных данных
-                checkbox_input = self.element_is_present((locator[0], locator[1] + "/input"))  # Ищем input
+                checkbox_input = self.element_is_present(
+                    (locator[0], locator[1] + "/input"))  # Ищем input ("xpath", "//label[@id=1]"+"/input")
                 assert checkbox_input.is_selected(), f"Ошибка: чекбокс '{name}' не выбран!"
 
     def choice_random_checkbox(self):
@@ -69,3 +71,32 @@ class CheckBoxPage(BasePage):
 
     # Крч идея в чём, мы получаем, выходные названия. И дальше смотрим они есть в in @for label, если да.
     # То мы чекаем //label//input он должен вернуть True, если нет, то ошибка, что не выбран.
+
+
+class RadioButtonPage(BasePage):
+    locators = RadioButtonPageLocators()
+
+    def choice_yes_radio_buttons(self):
+        self.elements_is_clickable(self.locators.YES_RADIOBUTTON).click()
+        self.checked_radio_buttons_true("yesRadio")
+
+    def choice_no_radio_buttons(self):
+        self.elements_is_clickable(self.locators.NO_RADIOBUTTON).click()
+        assert self.element_is_present(self.locators.NO_RADIOBUTTON_STATUS).is_selected() is False, "No is selected!"
+
+    def choice_impressive_radio_buttons(self):
+        self.elements_is_clickable(self.locators.IMPRESSIVE_RADIOBUTTON).click()
+        self.checked_radio_buttons_true("impressiveRadio")
+
+    def checked_radio_buttons_true(self, radio_button_id):
+        radiobuttons = self.elements_are_present(self.locators.RADIO_BUTTON_LIST_STATUS)
+        count_checked = 0
+        id_checked = []
+        for radio_button in radiobuttons:
+            if radio_button.get_attribute("id") == radio_button_id:  # yesRadio impressiveRadio noRadio
+                assert radio_button.is_selected() is True, f"{radio_button_id} is not selected!"
+            if radio_button.is_selected():
+                count_checked += 1
+                id_checked.append(radio_button.get_attribute("id"))
+
+        assert count_checked == 1, f"Selected is {id_checked}"

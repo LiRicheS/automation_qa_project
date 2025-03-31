@@ -2,7 +2,7 @@ from data.data import Person
 from faker import Faker
 
 fake_ru = Faker('ru_RU')  # Генерация данных на русском
-Faker.seed()
+Faker.seed()  # Устанавливает фиксированное значение для генератора случайных чисел.
 
 
 def generate_data_person():

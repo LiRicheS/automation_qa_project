@@ -58,6 +58,15 @@ class CheckboxPageLocators:
     }
 
 
+class RadioButtonPageLocators:
+    RADIO_BUTTON_LIST_STATUS = (By.XPATH, "//input[@name='like']")
+    YES_RADIOBUTTON = (By.XPATH, "//label[@for='yesRadio']")
+    # YES_RADIOBUTTON_STATUS = (By.XPATH, "//input[@id='yesRadio']")
 
+    IMPRESSIVE_RADIOBUTTON = (By.XPATH, "//label[@for='impressiveRadio']")
+    # IMPRESSIVE_RADIOBUTTON_STATUS = (By.XPATH, "//input[@id='impressiveRadio']")
+
+    NO_RADIOBUTTON = (By.XPATH, "//label[@for='noRadio']")
+    NO_RADIOBUTTON_STATUS = (By.XPATH, "//input[@id='noRadio']")
 
 

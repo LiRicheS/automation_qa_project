@@ -1,6 +1,6 @@
 import time
 
-from pages.elements_page import TextBoxPage, CheckBoxPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage
 
 
 class TestTextBoxPage:
@@ -25,3 +25,14 @@ class TestCheckBoxPage:
         time.sleep(2)
         checkbox_page.choice_random_checkbox()
         time.sleep(2)
+
+
+class TestRadioButtonPage:
+
+    def test_radio_button(self, driver):
+        radiobutton_page = RadioButtonPage(driver, "https://demoqa.com/radio-button")
+        radiobutton_page.open()
+        radiobutton_page.choice_yes_radio_buttons()
+        radiobutton_page.choice_no_radio_buttons()
+        radiobutton_page.choice_impressive_radio_buttons()
+
