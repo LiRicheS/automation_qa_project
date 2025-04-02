@@ -1,6 +1,7 @@
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 from typing import Tuple
 
 from selenium.webdriver.support.wait import WebDriverWait
@@ -14,6 +15,7 @@ class BasePage:
     def __init__(self, driver, url):
         self.driver = driver
         self.url = url
+        self.action = ActionChains(driver)
 
     """ Get and opened specified URL """
     def open(self):
@@ -60,7 +62,8 @@ class BasePage:
         return self.driver.execute_script("return arguments[0].scrollIntoView(true);", element)
         # Позволяет проскролить к нужному нам, веб-элементу
 
-
-
+    """ Refresh page"""
+    def refresh_page(self):
+        return self.driver.refresh()
 
 

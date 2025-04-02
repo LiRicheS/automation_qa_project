@@ -70,3 +70,39 @@ class RadioButtonPageLocators:
     NO_RADIOBUTTON_STATUS = (By.XPATH, "//input[@id='noRadio']")
 
 
+class WebTablesPageLocators:
+    # control_button
+    ADD_PERSON_BUTTON = (By.XPATH, "//button[@id='addNewRecordButton']")
+
+    # ADD_PERSON_FIELD
+    FIRSTNAME_FIELD = (By.XPATH, "//input[@id='firstName']")
+    LASTNAME_FIELD = (By.XPATH, "//input[@id='lastName']")
+    EMAIL_FIELD = (By.XPATH, "//input[@id='userEmail']")
+    AGE_FIELD = (By.XPATH, "//input[@id='age']")
+    SALARY_FIELD = (By.XPATH, "//input[@id='salary']")
+    DEPARTMENT_FIELD = (By.XPATH, "//input[@id='department']")
+    SUBMIT_BUTTON = (By.XPATH, "//button[@id='submit']")
+
+    # tables_people
+    FULL_PEOPLE_LIST = (By.XPATH, "//div[@class='rt-tr-group']")
+
+    SEARCH_FIELD = (By.XPATH, "//input[@id='searchBox']")
+    EDIT_BUTTON = (By.CSS_SELECTOR, "span[title='Edit']")
+    DELETE_BUTTON = (By.CSS_SELECTOR, "span[title='Delete']")
+    ROW_PARENT = (By.XPATH, ".//ancestor::div[@class='rt-tr-group']")
+
+    SELECT_BUTTON_ROWS = (By.CSS_SELECTOR, "span[class='select-wrap -pageSizeOptions']")
+    COUNT_ROWS_VALUE = (By.XPATH, "//option")
+    SELECT = (By.CSS_SELECTOR, "select[aria-label='rows per page']")
+
+
+class ButtonsPageLocators:
+    DOUBLE_CLICK_BUTTON = (By.XPATH, "//button[@id='doubleClickBtn']")
+    INFO_DCBTN = (By.XPATH, "//p[@id='doubleClickMessage']")
+
+    RIGHT_CLICK_BUTTON = (By.XPATH, "//button[@id='rightClickBtn']")
+    INFO_RCB = (By.XPATH, "//p[@id='rightClickMessage']")
+
+    CLICK_BUTTON = (By.XPATH, "(//button[contains(text(),'Click Me')])[3]")
+    INFO_CLICKBTN = (By.XPATH, "//p[@id='dynamicClickMessage']")
+
