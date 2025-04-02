@@ -128,3 +128,11 @@ class UploadDownloadPageLocators:
     DOWNLOAD_BUTTON = (By.XPATH, "//a[@id='downloadButton']")
     UPLOAD_BUTTON = (By.CSS_SELECTOR, "input[id='uploadFile']")
     UPLOAD_PATH_INFO = (By.XPATH, "//p[@id='uploadedFilePath']")
+
+
+class DynamicPropertiesPageLocators:
+    ENABLE_AFTER_BUTTON = (By.XPATH, "//button[@id='enableAfter']")
+    COLOR_CHANGE_BUTTON = (By.XPATH, "//button[@id='colorChange']")
+    VISIBLE_AFTER_BUTTON = (By.XPATH, "//button[@id='visibleAfter']")
+
+

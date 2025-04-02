@@ -22,9 +22,9 @@ class BasePage:
         self.driver.get(self.url)
 
     """ Waiting, until element is visible """
-    def element_is_visible(self, locator: Tuple[str, str], timeout: int = 5):  # locator = ("xpath", "//a[@id=2]")
+    def element_is_visible(self, locator: Tuple[str, str], timeout: int = 5, message=None):  # locator = ("xpath", "//a[@id=2]")
         # возвращает веб-элемент
-        return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
+        return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator), message=message)
         # visibility_of_element_located : Ожидает, что элемент станет видимым.
 
     """ Waiting, until are elements is visible """

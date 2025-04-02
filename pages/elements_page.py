@@ -7,7 +7,7 @@ from selenium.webdriver import Keys
 from generator.generator import generate_data_person
 from locators.elements_page_locators import (TextBoxPageLocators, CheckboxPageLocators, RadioButtonPageLocators,
                                              WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators,
-                                             UploadDownloadPageLocators)
+                                             UploadDownloadPageLocators, DynamicPropertiesPageLocators)
 from pages.base_page import BasePage
 
 
@@ -310,3 +310,35 @@ class UploadDownloadPage(BasePage):
         upload_button.send_keys(file_path)
 
         assert self.element_is_visible(self.locators.UPLOAD_PATH_INFO).text == "C:\\fakepath\\example.json", "No upload path info"
+
+
+class DynamicPropertiesPage(BasePage):
+    locators = DynamicPropertiesPageLocators()
+
+    def check_change_color_button(self):
+        start_time = time.time()
+        color_button = self.element_is_present(self.locators.COLOR_CHANGE_BUTTON)
+        color = str(color_button.value_of_css_property("color"))
+        color_extend = "rgba(220, 53, 69, 1)"
+
+        while color_extend != color:
+            color = str(color_button.value_of_css_property("color"))
+            if color == color_extend:
+                break
+        end_time = time.time()
+
+        return color, color_extend, float(end_time - start_time)
+
+    def enable_after_button(self):
+        start_time = time.time()
+        enable_after_button = self.element_is_present(self.locators.ENABLE_AFTER_BUTTON)
+
+        while enable_after_button.is_enabled() is False:
+            enable_after_button.click()
+        end_time = time.time()
+
+        return enable_after_button, enable_after_button.is_enabled(), float(end_time - start_time)
+
+    def visible_after_button(self):
+        visible_after_button = self.element_is_visible(self.locators.VISIBLE_AFTER_BUTTON, timeout=5, message="Element is not visible after 5 seconds")
+        visible_after_button.click()

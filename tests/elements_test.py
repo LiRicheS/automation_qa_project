@@ -2,7 +2,7 @@ import random
 import time
 
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage, \
-    UploadDownloadPage
+    UploadDownloadPage, DynamicPropertiesPage
 
 
 class TestTextBoxPage:
@@ -123,3 +123,29 @@ class TestUploadDownloadPage:
         up_down_load_page = UploadDownloadPage(driver_no_incognito, "https://demoqa.com/upload-download")
         up_down_load_page.open()
         up_down_load_page.upload_file()
+
+
+class TestDynamicPropertiesPage:
+
+    def test_change_color_button(self, driver):
+        dynamic_properties_page = DynamicPropertiesPage(driver, "https://demoqa.com/dynamic-properties")
+        dynamic_properties_page.open()
+        color_change_info = dynamic_properties_page.check_change_color_button()
+        if color_change_info[2] < 6.0:
+            assert color_change_info[0] == color_change_info[1], "Change color button did not change"
+        else:
+            assert color_change_info[2] < 6.0, "The color change has been taking too long"
+
+    def test_click_button_after_enable(self, driver):
+        dynamic_properties_page = DynamicPropertiesPage(driver, "https://demoqa.com/dynamic-properties")
+        dynamic_properties_page.open()
+        info_button = dynamic_properties_page.enable_after_button()
+        if 6.0 > info_button[2] >= 5.0:
+            assert True is info_button[1], "Button is not enabled"
+        else:
+            assert 6.0 > info_button[2] >= 5.0, "The button has been enabled is too long"
+
+    def test_button_visible_after(self, driver):
+        dynamic_properties_page = DynamicPropertiesPage(driver, "https://demoqa.com/dynamic-properties")
+        dynamic_properties_page.open()
+        dynamic_properties_page.visible_after_button()
