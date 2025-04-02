@@ -122,3 +122,9 @@ class LinksPageLocators:
     NOT_FOUND_LINK = (By.XPATH, "//a[@id='invalid-url']")
 
     LIST_CHECK_STATUS_API_LINK = (By.XPATH, "//p//b")  # ['status-code', 'Message']
+
+
+class UploadDownloadPageLocators:
+    DOWNLOAD_BUTTON = (By.XPATH, "//a[@id='downloadButton']")
+    UPLOAD_BUTTON = (By.CSS_SELECTOR, "input[id='uploadFile']")
+    UPLOAD_PATH_INFO = (By.XPATH, "//p[@id='uploadedFilePath']")

@@ -1,7 +1,8 @@
 import random
 import time
 
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage, \
+    UploadDownloadPage
 
 
 class TestTextBoxPage:
@@ -109,3 +110,16 @@ class TestLinksPage:
         info_response = links_page.click_on_link_no_content()
         assert info_response[0] == str(204), "Status code is not 204 in link info"
         assert info_response[1] == "No Content", "Info is not NoContent"
+
+
+class TestUploadDownloadPage:
+
+    def test_download(self, driver_no_incognito):
+        up_down_load_page = UploadDownloadPage(driver_no_incognito, "https://demoqa.com/upload-download")
+        up_down_load_page.open()
+        up_down_load_page.download_file()
+
+    def test_upload(self, driver_no_incognito):
+        up_down_load_page = UploadDownloadPage(driver_no_incognito, "https://demoqa.com/upload-download")
+        up_down_load_page.open()
+        up_down_load_page.upload_file()

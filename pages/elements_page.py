@@ -1,11 +1,13 @@
 import random
 import time
 import requests
+import os
 
 from selenium.webdriver import Keys
 from generator.generator import generate_data_person
 from locators.elements_page_locators import (TextBoxPageLocators, CheckboxPageLocators, RadioButtonPageLocators,
-                                             WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators)
+                                             WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators,
+                                             UploadDownloadPageLocators)
 from pages.base_page import BasePage
 
 
@@ -284,3 +286,27 @@ class LinksPage(BasePage):
         list_link_info_response = self.elements_are_present(self.locators.LIST_CHECK_STATUS_API_LINK)
         return [list_link_info_response[0].text, list_link_info_response[1].text]
 
+
+class UploadDownloadPage(BasePage):
+    locators = UploadDownloadPageLocators()
+
+    def download_file(self):
+        print(os.path.join(os.getcwd(), "downloads"))
+        files_in_folder_before = set(os.listdir(os.path.join(os.getcwd(), "downloads")))
+
+        download_button = self.elements_is_clickable(self.locators.DOWNLOAD_BUTTON)
+        self.go_to_element(download_button)
+        download_button.click()
+        time.sleep(3)
+
+        files_in_folder_after = set(os.listdir(os.path.join(os.getcwd(), "downloads")))
+        new_files = files_in_folder_after - files_in_folder_before
+
+        assert new_files, f"No new_file :{new_files} in folder {files_in_folder_after}"
+
+    def upload_file(self):
+        file_path = str(os.path.join(os.getcwd(), "uploads", "example.json"))
+        upload_button = self.elements_is_clickable(self.locators.UPLOAD_BUTTON)
+        upload_button.send_keys(file_path)
+
+        assert self.element_is_visible(self.locators.UPLOAD_PATH_INFO).text == "C:\\fakepath\\example.json", "No upload path info"
