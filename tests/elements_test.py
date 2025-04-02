@@ -1,7 +1,7 @@
 import random
 import time
 
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage
 
 
 class TestTextBoxPage:
@@ -95,3 +95,17 @@ class TestButtonsPage:
         button_page.open()
         button_page.click_on_dynamic_click_button()
 
+
+class TestLinksPage:
+
+    def test_link_open_new_window(self, driver):
+        links_page = LinksPage(driver, "https://demoqa.com/links")
+        links_page.open()
+        assert links_page.click_on_link_open_new_tab_button() == "https://demoqa.com/", "No link open new tab"
+
+    def test_link_no_content(self, driver):
+        links_page = LinksPage(driver, "https://demoqa.com/links")
+        links_page.open()
+        info_response = links_page.click_on_link_no_content()
+        assert info_response[0] == str(204), "Status code is not 204 in link info"
+        assert info_response[1] == "No Content", "Info is not NoContent"

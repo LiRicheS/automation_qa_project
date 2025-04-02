@@ -1,10 +1,11 @@
 import random
 import time
+import requests
 
 from selenium.webdriver import Keys
 from generator.generator import generate_data_person
 from locators.elements_page_locators import (TextBoxPageLocators, CheckboxPageLocators, RadioButtonPageLocators,
-                                             WebTablesPageLocators, ButtonsPageLocators)
+                                             WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators)
 from pages.base_page import BasePage
 
 
@@ -265,3 +266,21 @@ class ButtonsPage(BasePage):
         id_button = click_button.get_attribute("id")
         self.refresh_page()
         assert id_button != self.elements_is_clickable(self.locators.CLICK_BUTTON).get_attribute("id"), "No refresh id click button"
+
+
+class LinksPage(BasePage):
+    locators = LinksPageLocators()
+
+    def click_on_link_open_new_tab_button(self):
+        self.elements_is_clickable(self.locators.HOME_LINK).click()
+        window_opened = self.get_all_open_window_tab()
+        self.switch_to_window(window_opened[1])
+        return self.get_current_url()
+
+    def click_on_link_no_content(self):
+        self.elements_is_clickable(self.locators.NO_CONTENT_LINK).click()
+        status_code = requests.get(url="https://demoqa.com/no-content").status_code
+        assert status_code == 204, "Status code is not 204, in request"
+        list_link_info_response = self.elements_are_present(self.locators.LIST_CHECK_STATUS_API_LINK)
+        return [list_link_info_response[0].text, list_link_info_response[1].text]
+

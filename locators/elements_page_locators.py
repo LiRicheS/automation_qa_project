@@ -106,3 +106,19 @@ class ButtonsPageLocators:
     CLICK_BUTTON = (By.XPATH, "(//button[contains(text(),'Click Me')])[3]")
     INFO_CLICKBTN = (By.XPATH, "//p[@id='dynamicClickMessage']")
 
+
+class LinksPageLocators:
+    # links that open in new tab
+    HOME_LINK = (By.XPATH, "//a[@id='simpleLink']")
+    DYNAMIC_LINK = (By.XPATH, "//a[@id='dynamicLink']")
+
+    # links that send an api call
+    CREATED_LINK = (By.XPATH, "//a[@id='created']")
+    NO_CONTENT_LINK = (By.XPATH, "//a[@id='no-content']")
+    MOVED_LINK = (By.XPATH, "//a[@id='moved']")
+    BAD_REQUEST_LINK = (By.XPATH, "//a[@id='bad-request']")
+    UNAUTHORIZED_LINK = (By.XPATH, "//a[@id='unauthorized']")
+    FORBIDDEN_LINK = (By.XPATH, "//a[@id='forbidden']")
+    NOT_FOUND_LINK = (By.XPATH, "//a[@id='invalid-url']")
+
+    LIST_CHECK_STATUS_API_LINK = (By.XPATH, "//p//b")  # ['status-code', 'Message']

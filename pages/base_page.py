@@ -66,4 +66,14 @@ class BasePage:
     def refresh_page(self):
         return self.driver.refresh()
 
+    """ Get All Open Window-Tab"""
+    def get_all_open_window_tab(self):
+        return self.driver.window_handles
 
+    """ Switch to Window-Tab"""
+    def switch_to_window(self, window):
+        self.driver.switch_to.window(window)
+
+    """ Get Current URL Page"""
+    def get_current_url(self):
+        return self.driver.current_url
