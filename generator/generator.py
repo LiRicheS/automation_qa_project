@@ -11,6 +11,8 @@ def generate_data_person():
         first_name=fake_ru.first_name(),
         last_name=fake_ru.last_name(),
         email=fake_ru.email(),
+        phone='8987155790',
+        date_of_birth=fake_ru.date_of_birth(),
         age=str(random.randint(39, 40)),
         salary=str(random.randint(1, 9999999999)),
         department=fake_ru.job(),
