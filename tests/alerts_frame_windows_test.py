@@ -1,7 +1,7 @@
 import random
 import time
 
-from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage
+from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage
 
 
 class TestBrowserWindowsPage:
@@ -65,4 +65,24 @@ class TestAlertsPage:
 
         result = alerts_page.click_button_alert_to_fill_text()
         assert result[0] == result[1], "Alert is didn`t fill text"
+
+
+class TestFramesPage:
+    def test_check_frame1(self, driver):
+        frames_page = FramesPage(driver, "https://demoqa.com/frames")
+        frames_page.open()
+
+        result_info = frames_page.check_frame(iframe_name='frame1')
+        assert result_info['width'] == '500px', "Frame width is not 500px"
+        assert result_info['height'] == '350px', "Frame height is not 350px"
+        assert result_info['h1_text'] == 'This is a sample page', "Frame h1_text is not a sample page"
+
+    def test_check_frame2(self, driver):
+        frames_page = FramesPage(driver, "https://demoqa.com/frames")
+        frames_page.open()
+
+        result_info = frames_page.check_frame(iframe_name='frame2')
+        assert result_info['width'] == '100px', "Frame width is not 100px"
+        assert result_info['height'] == '100px', "Frame height is not 100px"
+        assert result_info['h1_text'] == 'This is a sample page', "Frame h1_text is not a sample page"
 

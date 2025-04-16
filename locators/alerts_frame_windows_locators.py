@@ -18,3 +18,10 @@ class AlertsPageLocators:
 
     PROMPT_BUTTON = (By.XPATH, "//button[@id='promtButton']")
     PROMPT_ALERT_RESULT = (By.XPATH, "//span[@id='promptResult']")
+
+
+class FramesPageLocators:
+    FIRST_FRAME = (By.XPATH, "//iframe[@id='frame1']")
+    SECOND_FRAME = (By.XPATH, "//iframe[@id='frame2']")
+
+    H1_ON_FRAME = (By.XPATH, "//h1[@id='sampleHeading']")

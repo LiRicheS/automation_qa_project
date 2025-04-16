@@ -3,7 +3,7 @@ import time
 
 from selenium.webdriver import Keys
 
-from locators.alerts_frame_windows_locators import BrowserWindowsPageLocators, AlertsPageLocators
+from locators.alerts_frame_windows_locators import BrowserWindowsPageLocators, AlertsPageLocators, FramesPageLocators
 from pages.base_page import BasePage
 from selenium.common.exceptions import NoAlertPresentException, TimeoutException
 
@@ -139,3 +139,27 @@ class AlertsPage(BasePage):
             # Alert не подтвердился
             return False
 
+
+class FramesPage(BasePage):
+    locators = FramesPageLocators()
+
+    def check_frame(self, iframe_name: str) -> dict:
+        frame_map = {
+            "frame1": self.locators.FIRST_FRAME,
+            "frame2": self.locators.SECOND_FRAME
+        }
+
+        frame = self.element_is_present(frame_map[iframe_name])
+        width = frame.get_attribute('width')
+        height = frame.get_attribute('height')
+
+        self.driver.switch_to.frame(frame)
+        h1_text = self.element_is_present(self.locators.H1_ON_FRAME).text
+
+        self.driver.switch_to.default_content()
+
+        return {
+            "width": width,
+            "height": height,
+            "h1_text": h1_text
+        }
