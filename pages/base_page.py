@@ -66,6 +66,9 @@ class BasePage:
     def refresh_page(self):
         return self.driver.refresh()
 
+    def close_tab(self):
+        return self.driver.close()
+
     """ Get All Open Window-Tab"""
     def get_all_open_window_tab(self):
         return self.driver.window_handles
@@ -77,3 +80,19 @@ class BasePage:
     """ Get Current URL Page"""
     def get_current_url(self):
         return self.driver.current_url
+
+    """ Get Current Handle Page"""
+    def get_current_window_handle(self):
+        return self.driver.current_window_handle
+
+    """ Get window size"""
+    def get_window_size(self):
+        return self.driver.get_window_size()
+
+    """ Alert is present"""
+    def alert_is_present(self, timeout: int = 5):
+        return wait(self.driver, timeout).until(EC.alert_is_present())
+
+    """ Switch to alert """
+    def switch_to_alert(self):
+        return self.driver.switch_to.alert
