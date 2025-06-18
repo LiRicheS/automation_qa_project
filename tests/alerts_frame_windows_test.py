@@ -1,7 +1,7 @@
 import random
 import time
 
-from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage
+from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage, ModalsDialogsPage
 
 
 class TestBrowserWindowsPage:
@@ -86,3 +86,34 @@ class TestFramesPage:
         assert result_info['height'] == '100px', "Frame height is not 100px"
         assert result_info['h1_text'] == 'This is a sample page', "Frame h1_text is not a sample page"
 
+
+class TestNestedFramesPage:
+
+    def test_check_frames(self, driver):
+        nested_frames_page = NestedFramesPage(driver, "https://demoqa.com/nestedframes")
+        nested_frames_page.open()
+
+        result_info = nested_frames_page.check_nested_frame()
+        assert result_info['parent_text'] == "Parent frame", "Nested frame is not a parent frame"
+        assert result_info['child_text'] == "Child Iframe", "Nested frame is not a child frame"
+
+
+class TestModalsDialogsPage:
+
+    def test_small_modal(self, driver):
+        modals_dialogs_page = ModalsDialogsPage(driver, "https://demoqa.com/modal-dialogs")
+        modals_dialogs_page.open()
+        result = modals_dialogs_page.check_modal_dialogs(modal="small")
+
+        assert result['small_title'] == "Small Modal", "Modal-title is not match"
+        assert result['small_text'] == "This is a small modal. It has very less content", "Modal-text is not match"
+        # print(result['status_is_close'])
+
+    def test_large_modal(self, driver):
+        modals_dialogs_page = ModalsDialogsPage(driver, "https://demoqa.com/modal-dialogs")
+        modals_dialogs_page.open()
+        result = modals_dialogs_page.check_modal_dialogs(modal="large")
+
+        assert result['large_title'] == "Large Modal", "Modal-title is not match"
+        assert result['large_text'] == "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "Modal-text is not match"
+        # print(result['status_is_close'])

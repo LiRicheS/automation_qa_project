@@ -25,3 +25,26 @@ class FramesPageLocators:
     SECOND_FRAME = (By.XPATH, "//iframe[@id='frame2']")
 
     H1_ON_FRAME = (By.XPATH, "//h1[@id='sampleHeading']")
+
+
+class NestedFramesPageLocators:
+    PARENT_FRAME = (By.XPATH, "//iframe[@id='frame1']")
+    PARENT_FRAME_TEXT = (By.XPATH, "//body")
+
+    CHILD_FRAME = (By.XPATH, "//iframe[@srcdoc='<p>Child Iframe</p>']")
+    CHILD_FRAME_TEXT = (By.XPATH, "//p")
+
+
+class ModalsDialogsPageLocators:
+    BUTTON_SMALL_MODAL = (By.XPATH, "//button[@id='showSmallModal']")
+    BUTTON_LARGE_MODAL = (By.XPATH, "//button[@id='showLargeModal']")
+
+    # small modal _ info
+    TITLE_SMALL_MODAL = (By.XPATH, "//div[@class='modal-title h4']")
+    TEXT_SMALL_MODAL = (By.XPATH, "//div[@class='modal-body']")
+    CLOSE_SMALL_MODAL_BUTTON = (By.XPATH, "//button[@id='closeSmallModal']")
+
+    # large modal _ info
+    TITLE_LARGE_MODAL = (By.XPATH, "//div[@class='modal-title h4']")
+    TEXT_LARGE_MODAL = (By.XPATH, "//div[@class='modal-body']//p")
+    CLOSE_LARGE_MODAL_BUTTON = (By.XPATH, "//button[@id='closeLargeModal']")

@@ -10,7 +10,6 @@ prefs = {
     "download.default_directory": os.path.join(os.getcwd(), "downloads"),
 }
 
-
 @pytest.fixture(scope='function')
 def driver():
     options.add_argument('--window-size=1920,1080')

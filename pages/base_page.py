@@ -4,12 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from typing import Tuple
 
+import allure
 from selenium.webdriver.support.wait import WebDriverWait
-
-"""Теперь нам нужно реализовать нашу, базовую страницу. Она будет использовать нам драйвер.
-Это класс, от которого будут наследоваться, все остальные наши страницы.
-"""
-
 
 class BasePage:
     def __init__(self, driver, url):
@@ -96,3 +92,38 @@ class BasePage:
     """ Switch to alert """
     def switch_to_alert(self):
         return self.driver.switch_to.alert
+
+    @allure.step('Double click')
+    def action_double_click(self, element):
+        action = ActionChains(self.driver)
+        action.double_click(element)
+        action.perform()
+
+    @allure.step('Right click')
+    def action_right_click(self, element):
+        action = ActionChains(self.driver)
+        action.context_click(element)
+        action.perform()
+
+    @allure.step('Drag and drop by offset')
+    def action_drag_and_drop_by_offset(self, element, x_coords, y_coords):
+        action = ActionChains(self.driver)
+        action.drag_and_drop_by_offset(element, x_coords, y_coords)
+        action.perform()
+
+    @allure.step('Drag and drop element to element')
+    def action_drag_and_drop_to_element(self, what, where):
+        action = ActionChains(self.driver)
+        action.drag_and_drop(what, where)
+        action.perform()
+
+    @allure.step('Move cursor to element')
+    def action_move_to_element(self, element):
+        action = ActionChains(self.driver)
+        action.move_to_element(element)
+        action.perform()
+
+    @allure.step('Remove footer')
+    def remove_footer(self):
+        self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
+        self.driver.execute_script("document.getElementsById('close-fixedban').remove();")

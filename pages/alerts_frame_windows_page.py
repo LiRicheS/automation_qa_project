@@ -3,7 +3,9 @@ import time
 
 from selenium.webdriver import Keys
 
-from locators.alerts_frame_windows_locators import BrowserWindowsPageLocators, AlertsPageLocators, FramesPageLocators
+from locators.alerts_frame_windows_locators import (BrowserWindowsPageLocators, AlertsPageLocators, FramesPageLocators,
+                                                    NestedFramesPageLocators, ModalsDialogsPageLocators)
+
 from pages.base_page import BasePage
 from selenium.common.exceptions import NoAlertPresentException, TimeoutException
 
@@ -163,3 +165,58 @@ class FramesPage(BasePage):
             "height": height,
             "h1_text": h1_text
         }
+
+
+class NestedFramesPage(BasePage):
+    locators = NestedFramesPageLocators()
+
+    def check_nested_frame(self):
+        parent_frame = self.element_is_present(self.locators.PARENT_FRAME)
+        self.driver.switch_to.frame(parent_frame)
+        parent_text = self.element_is_present(self.locators.PARENT_FRAME_TEXT).text
+
+        child_frame = self.element_is_present(self.locators.CHILD_FRAME)
+        self.driver.switch_to.frame(child_frame)
+        child_text = self.element_is_present(self.locators.CHILD_FRAME_TEXT).text
+
+        result_info = {
+            "parent_text": parent_text,
+            "child_text": child_text,
+        }
+
+        return result_info
+
+
+class ModalsDialogsPage(BasePage):
+    locators = ModalsDialogsPageLocators()
+
+    def check_modal_dialogs(self, modal="small"):
+        if modal == "small":
+            self.go_to_element(self.element_is_visible(self.locators.BUTTON_SMALL_MODAL))
+            self.element_is_visible(self.locators.BUTTON_SMALL_MODAL).click()
+            small_title = self.element_is_visible(self.locators.TITLE_SMALL_MODAL).text
+            small_text = self.element_is_visible(self.locators.TEXT_SMALL_MODAL).text
+            status_is_close = self.element_is_visible(self.locators.CLOSE_SMALL_MODAL_BUTTON).click()
+
+            result_info = {
+                "small_title": small_title,
+                "small_text": small_text,
+                "status_is_close": status_is_close
+            }
+
+            return result_info
+
+        elif modal == "large":
+            self.go_to_element(self.element_is_visible(self.locators.BUTTON_LARGE_MODAL))
+            self.element_is_visible(self.locators.BUTTON_LARGE_MODAL).click()
+            small_title = self.element_is_visible(self.locators.TITLE_LARGE_MODAL).text
+            small_text = self.element_is_visible(self.locators.TEXT_LARGE_MODAL).text
+            status_is_close = self.element_is_visible(self.locators.CLOSE_LARGE_MODAL_BUTTON).click()
+
+            result_info = {
+                "large_title": small_title,
+                "large_text": small_text,
+                "status_is_close": status_is_close
+            }
+
+            return result_info

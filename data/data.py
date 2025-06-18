@@ -1,8 +1,6 @@
 from dataclasses import dataclass
 from datetime import date
 
-
-# Dataclass - page 14 in info projectDocumentation
 @dataclass
 class Person:
     full_name: str = None
@@ -17,4 +15,14 @@ class Person:
     current_address: str = None
     permanent_address: str = None
 
+@dataclass
+class Color:
+    color_name: list = None
+
+@dataclass
+class Date:
+    day: str = None
+    month: str = None
+    year: str = None
+    time: str = None
 

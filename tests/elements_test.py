@@ -1,11 +1,16 @@
 import random
 import time
 
+import allure
+
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage, \
     UploadDownloadPage, DynamicPropertiesPage
 
 
+@allure.suite('Elements')
+@allure.feature('TextBox Page')
 class TestTextBoxPage:
+    @allure.title('Check fill all fields')
     def test_text_box(self, driver):
         text_box_page = TextBoxPage(driver, "https://demoqa.com/text-box")
         text_box_page.open()  # driver.get(URL)
