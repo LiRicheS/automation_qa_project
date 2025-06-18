@@ -14,6 +14,7 @@ prefs = {
 def driver():
     options.add_argument('--window-size=1920,1080')
     options.add_argument('--incognito')
+    options.add_argument('--headless')
     options.page_load_strategy = 'eager'
     service = Service(executable_path=ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
@@ -25,6 +26,7 @@ def driver():
 @pytest.fixture(scope='function')
 def driver_no_incognito():
     options.add_argument('--window-size=1920,1080')
+    options.add_argument('--headless')
     options.add_experimental_option("prefs", prefs)
     options.page_load_strategy = 'eager'
     service = Service(executable_path=ChromeDriverManager().install())

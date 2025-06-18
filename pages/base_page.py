@@ -7,6 +7,7 @@ from typing import Tuple
 import allure
 from selenium.webdriver.support.wait import WebDriverWait
 
+
 class BasePage:
     def __init__(self, driver, url):
         self.driver = driver
