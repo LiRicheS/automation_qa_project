@@ -7,26 +7,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Setup Python
+      - name: setup Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
-
-      - name: Install specific Chrome version
-        run: |
-          wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_135.0.7049.85-1_amd64.deb
-          sudo apt install ./google-chrome-stable_135.0.7049.85-1_amd64.deb
-          rm google-chrome-stable_135.0.7049.85-1_amd64.deb
-
-      - name: Verify Chrome version
-        run: google-chrome-stable --version
-
-      - name: Install dependencies
+      - name: Install Chrome
+        run: sudo apt-get install google-chrome-stable
+      - name: install dependencies
         run: pip install -r requirements.txt
-
       - name: Run tests
         run: pytest
